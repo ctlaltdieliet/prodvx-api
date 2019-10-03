@@ -1,6 +1,8 @@
 pkg install nodejs &&
 pkg install tsu &&
+pkg install curl &&
 npm i -g forever &&
 mkdir -p $HOME/.termux/boot &&
 echo "tsudo node $PREFIX/bin/forever $HOME/server_slb.js" > $HOME/.termux/boot/startserver &&
-curl -O "https://raw.githubusercontent.com/AudioVisualDistributors/OvertureDrivers/master/scripts/prodvx_api/server_slb.js"
+curl -O "https://raw.githubusercontent.com/avdistributors/prodvx-api/master/server_slb.js" &&
+/system/bin/reboot

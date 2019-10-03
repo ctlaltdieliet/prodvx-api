@@ -1,4 +1,4 @@
-This API enables external control of ProDVX panels with built-in LED lights.\
+This API enables external control of ProDVX panels with built-in LED lights.<br>
 To see these installation instructions, open a browser on your ProDVX panel and go to [tiny.cc/prodvxapi](tiny.cc/prodvxapi).
 
 ## Installation Steps
