@@ -68,24 +68,34 @@
 
     {% if page.content contains "code" %}
       <div id="notice">
-        <p>Test</p>
+        <p>Notice text will be shown here</p>
       </div>
 
       <style>
         #notice {
           position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
+          bottom: 2vw;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 90vw;
           background: hsl(200, 100%, 40%);
           color: white;
-          text-align: center;
           display: none;
+          justify-content: center;
+          align-items: center;
+          border-radius: 8px;
+        }
+        #notice > p {
+          margin: 0.7em 0;
+          font-size: 1.3em;
         }
       </style>
 
       <script>
-        $('div.highlight').click(function() { copyText(this.value) })
+        $('div.highlight').click(function() {
+          let textToCopy = $(this).find('code').text()
+          copyText(textToCopy)
+        })
 
         function copyText(text) {
           if (!navigator.clipboard) {
@@ -122,7 +132,7 @@
         function notice(text, color) {
           let notice = document.getElementById('notice')
           notice.querySelector('p').innerText = text
-          notice.style.display = 'block'
+          notice.style.display = 'flex'
           notice.style.background = color
           setTimeout(function() {
             notice.style.display = 'none'

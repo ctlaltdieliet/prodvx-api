@@ -8,13 +8,13 @@ To see these installation instructions, open a browser on your ProDVX panel and 
 4. Run Termux. Leave Termux open.
 5. Click the code snippet below to copy the command for your device, then paste and run it inside Termux.
 
-SLB
+#### SLB
 ```
 bash <(curl https://raw.githubusercontent.com/avdistributors/prodvx-api/master/install_slb.sh)
 ```
 
 
-DSKPL
+#### DSKPL
 ```
 bash <(curl https://raw.githubusercontent.com/avdistributors/prodvx-api/master/install_dskpl.sh)
 ```
