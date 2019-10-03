@@ -1,105 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>ProDVX API Install</title>
-</head>
-<body>
-  <h2>Installation Steps</h2>
-  <p><b>1.</b> Download <a href="https://f-droid.org/repo/com.termux_75.apk" target="_blank">Termux</a>.</p>
-  <p><b>2.</b> Download <a href="https://f-droid.org/repo/com.termux.boot_6.apk" target="_blank">Termux:Boot</a>.</p>
-  <p><b>3.</b> Install both apps. Run Termux:Boot, then close.</p>
-  <p><b>4.</b> Run Termux. Leave Termux open.</p>
-  <p><b>5.</b> Copy the command for your device below, then run it inside Termux:</p>
+<!doctype html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <p>
-    <b>SLB</b>
-    <textarea id="slb-cmd" onclick="this.focus();this.select()"></textarea>
-    <button onclick="copyText(document.getElementById('slb-cmd').value)">COPY SLB INSTALL COMMAND</button>
-  </p>
+{% seo %}
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="{{ '/assets/js/respond.js' | relative_url }}"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="{{ '/assets/css/ie.css' | relative_url }}">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-  <p>
-    <b>DSKPL</b>
-    <textarea id="dskpl-cmd" onclick="this.focus();this.select()"></textarea>
-    <button onclick="copyText(document.getElementById('dskpl-cmd').value)">COPY DSKPL INSTALL COMMAND</button>
-  </p>
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="{{ site.github.repository_url }}">View On GitHub</a></li>
+          {% if site.show_downloads %}
+            <li class="downloads"><a href="{{ site.github.zip_url }}">ZIP</a></li>
+            <li class="downloads"><a href="{{ site.github.tar_url }}">TAR</a></li>
+            <li class="title">DOWNLOADS</li>
+          {% endif %}
+        </nav>
+      </div><!-- end header -->
 
-  <div id="notice">
-    <p>Test</p>
-  </div>
+    <div class="wrapper">
 
-  <script>
-    document.getElementById('slb-cmd').innerText = 'bash <(curl https://raw.githubusercontent.com/AudioVisualDistributors/OvertureDrivers/master/scripts/prodvx_api/install_slb.sh)'
-    document.getElementById('dskpl-cmd').innerText = 'bash <(curl https://raw.githubusercontent.com/AudioVisualDistributors/OvertureDrivers/master/scripts/prodvx_api/install_dskpl.sh)'
+      <section>
+        <div id="title">
+          <h1>{{ site.title | default: site.github.repository_name }}</h1>
+          <p>{{ site.description | default: site.github.project_tagline }}</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/mattgraham">mattgraham</a></span>
+        </div>
 
-    function copyText(text) {
-      if (!navigator.clipboard) {
-        fallbackCopyTextToClipboard(text);
-        return;
-      }
-      navigator.clipboard.writeText(text).then(function() {
-        console.debug('Async: Copying to clipboard was successful!');
-        notice('Text copied to clipboard!', 'hsl(200, 100%, 40%)')
-      }, function(err) {
-        throw new Error('Async: Could not copy text', err);
-        notice('Could not copy text', 'darkred')
-      });
-    }
+        {{ content }}
 
-    function fallbackCopyTextToClipboard(text) {
-      var textArea = document.createElement("textarea");
-      textArea.value = text;
-      document.body.appendChild(textArea);
-      textArea.focus();
-      textArea.select();
-      try {
-        var successful = document.execCommand('copy');
-        var msg = successful ? 'successful' : 'unsuccessful';
-        console.debug('Fallback: Copying text command was ' + msg);
-        notice('Copying text command was ' + msg, 'hsl(200, 100%, 40%)')
-      } catch (err) {
-        throw new Error('Fallback: Unable to copy', err);
-        notice('Could not copy text', 'darkred')
-      }
-      document.body.removeChild(textArea);
-    }
+      </section>
 
-    function notice(text, color) {
-      let notice = document.getElementById('notice')
-      notice.querySelector('p').innerText = text
-      notice.style.display = 'block'
-      notice.style.background = color
-      setTimeout(function() {
-        notice.style.display = 'none'
-      }, 3000)
-    }
-  </script>
+    </div>
 
-  <style>
-    html {
-      font-family: Arial;
-      zoom: 100%;
-    }
-    button {
-      height: 40px;
-      padding: 0 20px;
-      margin: 5px 0;
-    }
-    textarea {
-      width: 100%;
-    }
-    #notice {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: hsl(200, 100%, 40%);
-      color: white;
-      text-align: center;
-      display: none;
-    }
-  </style>
-</body>
+    {% if site.google_analytics %}
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', '{{ site.google_analytics }}', 'auto');
+        ga('send', 'pageview');
+      </script>
+    {% endif %}
+  </body>
 </html>
