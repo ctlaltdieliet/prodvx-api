@@ -6,14 +6,15 @@ To see these installation instructions, open a browser on your ProDVX panel and 
 2. Install both apps by either clicking on the download in the notification bar, or using the "ApkInstaller" app.
 3. Run Termux:Boot, then close.
 4. Run Termux. Leave Termux open.
-5. Copy the command for your device below, then run it inside Termux:
+5. Click the code snippet below to copy the command for your device, then paste and run it inside Termux.
 
-SLB (Click code below to copy)
+SLB
 ```
 bash <(curl https://raw.githubusercontent.com/avdistributors/prodvx-api/master/install_slb.sh)
 ```
 
-DSKPL (Click code below to copy)
+
+DSKPL
 ```
 bash <(curl https://raw.githubusercontent.com/avdistributors/prodvx-api/master/install_dskpl.sh)
 ```
