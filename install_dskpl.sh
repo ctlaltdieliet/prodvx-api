@@ -1,6 +1,4 @@
-pkg install nodejs &&
-pkg install tsu &&
-pkg install curl &&
+pkg install nodejs tsu -y &&
 npm i -g forever &&
 mkdir -p $HOME/.termux/boot &&
 echo "tsudo node $PREFIX/bin/forever $HOME/server_dskpl.js" > $HOME/.termux/boot/startserver &&

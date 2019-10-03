@@ -10,11 +10,11 @@ To see these installation instructions, open a browser on your ProDVX panel and 
 
 #### SLB
 ```
-bash <(curl https://raw.githubusercontent.com/avdistributors/prodvx-api/master/install_slb.sh)
+pkg install curl -y && bash <(curl https://raw.githubusercontent.com/avdistributors/prodvx-api/master/install_slb.sh)
 ```
 
 
 #### DSKPL
 ```
-bash <(curl https://raw.githubusercontent.com/avdistributors/prodvx-api/master/install_dskpl.sh)
+pkg install curl -y && bash <(curl https://raw.githubusercontent.com/avdistributors/prodvx-api/master/install_dskpl.sh)
 ```
