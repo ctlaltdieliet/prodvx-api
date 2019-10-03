@@ -1,1 +1,8 @@
 theme: jekyll-theme-midnight
+title: ProDVX API Installation
+description: Instructions to download and install the ProDVX API
+github:
+  url1-title: Termux
+  url1: https://f-droid.org/repo/com.termux_75.apk
+  url2-title: Termux:Boot
+  url2: https://f-droid.org/repo/com.termux.boot_6.apk
