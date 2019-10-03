@@ -11,10 +11,10 @@ To see these installation instructions, open a browser on your ProDVX panel and 
 
 SLB
 ```bash
-bash <(curl https://raw.githubusercontent.com/AudioVisualDistributors/OvertureDrivers/master/scripts/prodvx_api/install_slb.sh)
+bash <(curl https://raw.githubusercontent.com/avdistributors/prodvx-api/master/install_slb.sh)
 ```
 
 DSKPL
 ```bash
-bash <(curl https://raw.githubusercontent.com/AudioVisualDistributors/OvertureDrivers/master/scripts/prodvx_api/install_dskpl.sh)
+bash <(curl https://raw.githubusercontent.com/avdistributors/prodvx-api/master/install_dskpl.sh)
 ```
