@@ -22,9 +22,9 @@
         <nav>
           <li class="fork"><a href="{{ site.github.repository_url }}">View On GitHub</a></li>
           {% if site.show_downloads %}
-            <li class="downloads"><a href="{{ site.github.url1 }}">{{ site.github.url1-title }}</a></li>
             <li class="downloads"><a href="{{ site.github.url2 }}">{{ site.github.url2-title }}</a></li>
-            <li class="title">APK DOWNLOADS</li>
+            <li class="downloads"><a href="{{ site.github.url1 }}">{{ site.github.url1-title }}</a></li>
+            <li class="title">Android APK Downloads</li>
           {% endif %}
         </nav>
       </div><!-- end header -->
@@ -56,6 +56,80 @@
       </script>
     {% endif %}
 
+    <!-- CUSTOM CODE BELOW ADDED BY TOBY -->
+
+    <style>
+      div#header > nav,
+      div.wrapper,
+      div.wrapper > section {
+        max-width: 80vw;
+      }
+    </style>
+
+    {% if page.content contains "code" %}
+      <div id="notice">
+        <p>Test</p>
+      </div>
+
+      <style>
+        #notice {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          background: hsl(200, 100%, 40%);
+          color: white;
+          text-align: center;
+          display: none;
+        }
+      </style>
+
+      <script>
+        $('div.language').click(function() { copyText(this.value) })
+
+        function copyText(text) {
+          if (!navigator.clipboard) {
+            fallbackCopyTextToClipboard(text);
+            return;
+          }
+          navigator.clipboard.writeText(text).then(function() {
+            console.debug('Async: Copying to clipboard was successful!');
+            notice('Text copied to clipboard!', 'hsl(200, 100%, 40%)')
+          }, function(err) {
+            throw new Error('Async: Could not copy text', err);
+            notice('Could not copy text', 'darkred')
+          });
+        }
+
+        function fallbackCopyTextToClipboard(text) {
+          var textArea = document.createElement("textarea");
+          textArea.value = text;
+          document.body.appendChild(textArea);
+          textArea.focus();
+          textArea.select();
+          try {
+            var successful = document.execCommand('copy');
+            var msg = successful ? 'successful' : 'unsuccessful';
+            console.debug('Fallback: Copying text command was ' + msg);
+            notice('Copying text command was ' + msg, 'hsl(200, 100%, 40%)')
+          } catch (err) {
+            throw new Error('Fallback: Unable to copy', err);
+            notice('Could not copy text', 'darkred')
+          }
+          document.body.removeChild(textArea);
+        }
+
+        function notice(text, color) {
+          let notice = document.getElementById('notice')
+          notice.querySelector('p').innerText = text
+          notice.style.display = 'block'
+          notice.style.background = color
+          setTimeout(function() {
+            notice.style.display = 'none'
+          }, 3000)
+        }
+      </script>
+    {% endif %}
     
   </body>
 </html>
