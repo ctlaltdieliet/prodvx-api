@@ -1,4 +1,4 @@
-This API enables external control of ProDVX panels with built-in LED lights.<br>
+This API enables external control of ProDVX panels with built-in LED lights.  
 To see these installation instructions, open a browser on your ProDVX panel and go to [tiny.cc/prodvxapi](tiny.cc/prodvxapi).
 
 ## Installation Steps
@@ -7,14 +7,15 @@ To see these installation instructions, open a browser on your ProDVX panel and 
 3. Run Termux:Boot, then close.
 4. Run Termux. Leave Termux open.
 5. Click the code snippet below to copy the command for your device, then paste and run it inside Termux.
+6. Allow the code to run and install the API. The panel will reboot itself, after which the API will be functional.
+7. See Usage details below.
 
-#### SLB
+### SLB
 ```
 pkg install curl -y && bash <(curl https://raw.githubusercontent.com/avdistributors/prodvx-api/master/install_slb.sh)
 ```
-
-
-#### DSKPL
+  
+### DSKPL/DSQPL
 ```
 pkg install curl -y && bash <(curl https://raw.githubusercontent.com/avdistributors/prodvx-api/master/install_dskpl.sh)
 ```

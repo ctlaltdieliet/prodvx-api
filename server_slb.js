@@ -9,6 +9,8 @@ const C_MAX = 100 // Range for colour values
 const net = require('net')
 const exec = require('child_process').exec
 
+exec(`stty -F ${SERIAL_PATH} 115200`) // Set baudrate
+
 let leds = []
 for (let i=0; i<52; i++) {
   leds.push({
@@ -24,9 +26,6 @@ function scale(num, in_min, in_max, out_min, out_max) {
   if (num > in_max) num = in_max
   return Math.round((num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min)
 }
-
-exec(`stty -F ${SERIAL_PATH} 115200`) // Set baudrate
-
 
 //------------------------------------------------------------------------------ LED REFRESH
 setInterval(function() {
@@ -52,7 +51,6 @@ setInterval(function() {
   bytes = bytes.map(n=>`\\x${n.toString(16).padStart(2, '0').toUpperCase()}`)
   exec(`bash -c "echo -en '${bytes.join('')}' > ${SERIAL_PATH}"`)
 }, REFRESH_MS)
-
 
 //------------------------------------------------------------------------------ SET FUNCTIONS
 function setSingle(index, l, r, g, b) {
@@ -81,7 +79,6 @@ function setAll(l, r, g, b) {
   for (let i=0; i<52; i++) setSingle(i, l, r, g, b)
 }
 
-
 //------------------------------------------------------------------------------ GET FUNCTIONS
 function getSingle(index) {
   if (typeof index !== 'number')
@@ -94,7 +91,6 @@ function getSingle(index) {
 function getAll() {
   return JSON.stringify(leds)
 }
-
 
 //------------------------------------------------------------------------------ TCP SERVER FUNCTIONS
 let server = net.createServer(onConnection).listen(SERVER_PORT, () => {
@@ -111,7 +107,6 @@ function onConnection(socket) {
 function onData(socket, data) {
   data = data.toString()
   console.log(socket.name, '>', data.replace('\n', '\\n').replace('\r', '\\r'))
-
   let match
   try {
     if ((match = data.match(/set (.*?) (\d+),(\d+),(\d+),(\d+)[\r\n]/i))) {
@@ -124,9 +119,11 @@ function onData(socket, data) {
       let b = parseInt(match[5])
       if (cmd === 'all') {
         setAll(l, r, g, b)
+        send('OK')
       }
       else if (ledNum && ledNum >= 1 && ledNum <= 52) {
         setSingle(ledNum - 1, l, r, g, b)
+        send('OK')
       }
       else {
         logError(socket, 'Invalid SET command')

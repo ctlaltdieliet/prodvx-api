@@ -6,7 +6,6 @@ const fs = require('fs')
 const net = require('net')
 const exec = require('child_process').exec
 
-
 //------------------------------------------------------------------------------ SET FUNCTION
 function setLed(path, val) {
   // Check inputs
@@ -15,14 +14,12 @@ function setLed(path, val) {
   exec(`bash -c "echo ${valStr} > ${path}"`)
 }
 
-
 //------------------------------------------------------------------------------ GET FUNCTION
 function getLed(path) {
   let val = parseInt(fs.readFileSync(path))
   val = (val > 0) ? '1' : '0'
   return val
 }
-
 
 //------------------------------------------------------------------------------ TCP SERVER FUNCTIONS
 let server = net.createServer(onConnection).listen(SERVER_PORT, () => {
@@ -39,7 +36,6 @@ function onConnection(socket) {
 function onData(socket, data) {
   data = data.toString()
   console.log(socket.name, '>', data.replace('\n', '\\n').replace('\r', '\\r'))
-
   let match
   try {
     if ((match = data.match(/set (.*?) (\d)[\r\n]/i))) {
@@ -48,9 +44,11 @@ function onData(socket, data) {
       let val = parseInt(match[2])
       if (cmd === 'green') {
         setLed(GREEN_PATH, val)
+        send('OK')
       }
       else if (cmd === 'red') {
         setLed(RED_PATH, val)
+        send('OK')
       }
       else {
         logError(socket, 'Invalid SET command')
