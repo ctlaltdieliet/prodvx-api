@@ -1,5 +1,5 @@
 This API enables external control of ProDVX panels with built-in LED lights.  
-To see these installation instructions, open a browser on your ProDVX panel and go to [tiny.cc/prodvxapi](tiny.cc/prodvxapi).
+To see these installation instructions, open a browser on your ProDVX panel and go to [tiny.cc/prodvxapi](https://avdistributors.github.io/prodvx-api/).
 
 ## Installation Steps
 1. Download APKs for Termux and Termux:Boot using the buttons at the top of this page.
