@@ -18,6 +18,7 @@ Where:
 > **G** = Green value, 0 -> 100  
 > **B** = Blue value, 0 -> 100  
 > LED 1 located at top center of panel, moving clockwise as numbers increase.  
+
 **NOTE:** LED brightness is not calibrated, and as such setting all colours to max value will *not* give a true white. Experimentation is needed to find the desired colour.  
   
 Examples (Response in bold):
@@ -33,6 +34,7 @@ Examples (Response in bold):
 
 Where:
 > **TARGET** = "all", or number from 1 -> 52  
+
 Response will be a stringified JSON object, which should be parsed.  
   
 Examples (Response in bold):
