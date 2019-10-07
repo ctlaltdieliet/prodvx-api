@@ -8,7 +8,7 @@ To see these installation instructions, open a browser on your ProDVX panel and 
 4. Run Termux. Leave Termux open.
 5. Click the code snippet below to copy the command for your device, then paste and run it inside Termux.
 6. Allow the code to run and install the API. The panel will reboot itself, after which the API will be functional.
-7. See Usage details below.
+7. Usage details can be found on the GitHub page (button at top left of this page).
 
 ### SLB
 ```
