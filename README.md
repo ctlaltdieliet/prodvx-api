@@ -3,6 +3,7 @@ API that allows control of ProDVX panels with built-in LED lights.
 To install, open a browser on the ProDVX panel and go to: [tiny.cc/prodvxapi](https://avdistributors.github.io/prodvx-api/)
 ---
 ## Usage
+Commands should be sent over a raw/telnet type data connection, on **port 5000**.
 All commands need to be terminated with an end-of-line character, which can be either **\r** OR **\n**.  
 Responses sent back from the panel will always end in **\n**  
 
