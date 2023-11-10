@@ -1,5 +1,7 @@
 const SERIAL_PATH = '/dev/ttyS1'
 const SERVER_PORT = 5000
+const HTTP_SERVER_PORT = 3004
+
 const REFRESH_MS = 50
 const L_MIN = 0
 const L_MAX = 15 // Range for L value
@@ -7,6 +9,9 @@ const C_MIN = 0
 const C_MAX = 100 // Range for colour values
 
 const net = require('net')
+const http = require('http')
+const url = require('url');
+
 const exec = require('child_process').exec
 
 exec(`stty -F ${SERIAL_PATH} 115200`) // Set baudrate
@@ -91,6 +96,49 @@ function getSingle(index) {
 function getAll() {
   return JSON.stringify(leds)
 }
+
+//------------------------------------------------------------------------------ HTTP SERVER FUNCTIONS
+http.createServer(function (req, res) {
+  console.log(req.url)  
+let params=new url.URLSearchParams(req.url)
+let para= params.sort()
+    // SET COMMAND
+    let action = params.get("action")
+    let all = params.get("led")
+    let ledNum = parseInt(params.get("led"))
+    let l = parseInt(params.get("l"))
+    let r = parseInt(params.get("r"))
+    let g = parseInt(params.get("g"))
+    let b = parseInt(params.get("b"))
+    if (action && action.toLowerCase() === 'set') {
+      if (r < C_MIN || r > C_MAX || g < C_MIN || g > C_MAX || b < C_MIN || b > C_MAX  || l < L_MIN || l > L_MAX){
+        res.writeHead(404);
+        res.end();
+      }
+      else if (all && all.toLowerCase() === 'all') {
+        setAll(l, r, g, b)
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.write('OK')
+        res.end();
+        }
+      else if (ledNum && ledNum >= 1 && ledNum <= 52) {
+        setSingle(ledNum - 1, l, r, g, b)
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.write('OK')
+        res.end();
+      }
+      else {
+        res.writeHead(404);
+        res.end();
+      }
+    }
+    else {
+      res.writeHead(404);
+      res.end();
+    }
+  
+
+}).listen(HTTP_SERVER_PORT); 
 
 //------------------------------------------------------------------------------ TCP SERVER FUNCTIONS
 let server = net.createServer(onConnection).listen(SERVER_PORT, () => {
